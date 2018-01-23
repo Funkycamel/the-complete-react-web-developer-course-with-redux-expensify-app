@@ -3,17 +3,29 @@ import { connect } from 'react-redux';
 import ExpenseForm from './ExpenseForm';
 import { addExpense } from '../actions/expenses';
 
-const AddExpensePage = (props) => (
-  <div>
-    <h1>Add Expense</h1>
-    <ExpenseForm 
-        onSubmit={(expense) => {
-            console.log(expense);
-            props.dispatch(addExpense(expense));
-            props.history.push('/');
-        }}
-    />
-  </div>
-);
+export class AddExpensePage extends React.Component {
 
-export default connect()(AddExpensePage);
+    onSubmit = (expense) => {
+        //console.log(expense);
+        //props.dispatch(addExpense(expense));
+        this.props.addExpense(expense); // because we use mapDispatchToProps below, this addExpense is assumed to be an action creator
+        this.props.history.push('/');
+    };
+
+    render() {
+        return (
+            <div>
+                <h1>Add Expense</h1>
+                <ExpenseForm onSubmit={this.onSubmit}/>
+            </div>
+        );
+    }
+}
+
+
+// Using this and not the commented out props.dispatch(addExpense(expense)) as it's easier to test
+const mapDispatchToProps = (dispatch) => ({
+    addExpense: (expense) => dispatch(addExpense(expense))
+});
+
+export default connect(undefined, mapDispatchToProps)(AddExpensePage);
