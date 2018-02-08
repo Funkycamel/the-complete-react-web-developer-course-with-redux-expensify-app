@@ -16,4 +16,4 @@ test('should correctly add up multiple expenses', () => {
     expect(res).toBe(114195);
 });
 
-console.log(selectExpensesTotal(expenses));
+//console.log(selectExpensesTotal(expenses));
