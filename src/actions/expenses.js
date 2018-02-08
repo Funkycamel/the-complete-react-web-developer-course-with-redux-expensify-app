@@ -13,7 +13,7 @@ import database from '../firebase/firebase.js';
 //     }
 // });
 
-// add expense
+// add expense to redux
 export const addExpense = (expense) => ({
     type: 'ADD_EXPENSE',
     expense
@@ -35,12 +35,13 @@ export const startAddExpense = (expenseData = {}) => {
     };
 };
 
-// remove expense
+// remove expense from redux
 export const removeExpense = ({ id } = {}) => ({
     type: 'REMOVE_EXPENSE',
     id
 });
 
+// remove expense from firebase
 export const startRemoveExpense = ({ id } = {}) => {
     return(dispatch) => {
         return database.ref(`expenses/${id}`).remove().then(() => {
@@ -57,13 +58,22 @@ export const editExpense = (id, updates) => ({
     updates
 });
 
-// SET_EXPENSES
+// edit expense in firebase
+export const startEditExpense = (id, updates) => {
+    return(dispatch) => {
+        return database.ref(`expenses/${id}`).update(updates).then(() => {
+            dispatch(editExpense(id, updates));
+        });
+    };
+};
+
+// get expenses from redux
 export const setExpenses = (expenses) => ({
     type: 'SET_EXPENSES',
     expenses
 });
   
-// export const startSetExpenses;
+// get expenses from firebase
 export const startSetExpenses = () => {
     return (dispatch) => {
         return database.ref('expenses').once('value').then((snapshot) => {
