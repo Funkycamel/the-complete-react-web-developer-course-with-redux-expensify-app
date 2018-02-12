@@ -6,7 +6,7 @@ import { startEditExpense, startRemoveExpense } from '../actions/expenses';
 export class EditExpensePage extends React.Component {
 
     onSubmit = (expense) => {
-        //this.props.dispatch(editExpense(this.props.expense.id, expense));
+        //this.props.dispatch(editExpense(this.props.expense.id, expense)); BELOW USES mapDispatchToProps
         this.props.startEditExpense(this.props.expense.id, expense);
         this.props.history.push('/');
     }
