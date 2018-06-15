@@ -1,2 +1,5 @@
-# expensify-app
-Working through another Andrew Mead udemy course
+# Expensify-app
+
+Playground: Building an expenses app from Andrew Mead
+
+[Demo](https://expensify-app.netlify.com)
